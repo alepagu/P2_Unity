@@ -20,6 +20,10 @@ public class MovientoFuerzas : MonoBehaviour
     public bool isRunning;
     private Animator animator;
 
+    // Contador de saltos
+    private int jumpCount;
+    public int maxJumpCount = 1;
+
     private void Start()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
@@ -61,9 +65,21 @@ public class MovientoFuerzas : MonoBehaviour
 
     private void ProcessingJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnFloor)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            rigidBody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+            jumpCount++;
+
+            if (isOnFloor || jumpCount < maxJumpCount)
+            {
+                jumpCount++;
+                rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, 0f); // Eliminar la velocidad vertical antes de saltar
+                rigidBody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+            }
+        }
+
+        if (isOnFloor)
+        {
+            jumpCount = 0; // Reiniciar el contador de saltos si está en el suelo
         }
     }
 
