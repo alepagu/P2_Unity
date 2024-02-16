@@ -15,5 +15,4 @@ public class FinJuego : MonoBehaviour
             Application.Quit(); //Salir de la partida.
         }
 
-    }
 }

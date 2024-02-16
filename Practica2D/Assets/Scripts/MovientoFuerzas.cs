@@ -65,6 +65,7 @@ public class MovientoFuerzas : MonoBehaviour
 
     private void ProcessingJump()
     {
+        animator.SetBool("isJumping", !isOnFloor);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             jumpCount++;
