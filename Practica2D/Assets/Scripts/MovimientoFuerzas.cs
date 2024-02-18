@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class MovientoFuerzas : MonoBehaviour
@@ -23,6 +24,10 @@ public class MovientoFuerzas : MonoBehaviour
     // Contador de saltos
     private int jumpCount;
     public int maxJumpCount = 1;
+
+    //Rebote por Colisión
+    public bool puedeMoverse = true;
+    public float fuerzaGolpe;
 
     private void Start()
     {
@@ -56,6 +61,8 @@ public class MovientoFuerzas : MonoBehaviour
     //Función para las fuerzas
     void ProcessingMovement () 
     {
+        //if (!puedeMoverse) return;
+
         inputMovement = Input.GetAxis("Horizontal");
         isRunning = inputMovement != 0 ? true : false;
         animator.SetBool("isRunning", isRunning);
@@ -93,4 +100,37 @@ public class MovientoFuerzas : MonoBehaviour
         }
 
     }
+    //Rebote
+    public void AplicarGolpe()
+    {
+        puedeMoverse = false;
+        Vector2 direccionGolpe;
+
+        if (rigidBody2D.velocity.x > 0)
+        {
+            direccionGolpe = new Vector2(-1, 1);
+        }
+        else
+        {
+            direccionGolpe = new Vector2(1, 1);
+        }
+
+        rigidBody2D.AddForce(direccionGolpe * fuerzaGolpe);
+    }
+
+    //Respawn
+    private void Respawn()
+    {
+        this.transform.position = new Vector2 (0, 0);
+        Debug.Log("Has muerto, intentálo de nuevo.");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "enemigo")
+        {
+            Respawn();
+        }
+    }
+
 }

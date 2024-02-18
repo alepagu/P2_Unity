@@ -5,11 +5,13 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Fruits : MonoBehaviour
 {
-    public Score puntos;
+    public int valor = 1;
+    public GameManager gameManager;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("El personaje me ha comido");
+        gameManager.SumarPuntos(valor);
         Destroy(this.gameObject);
     }
 }
