@@ -29,11 +29,16 @@ public class MovientoFuerzas : MonoBehaviour
     public bool puedeMoverse = true;
     public float fuerzaGolpe;
 
+    //Sonido
+    private AudioSource audioSource;
+    public AudioClip jumpClip;
+
     private void Start()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     bool ChekingFloor()
@@ -82,6 +87,7 @@ public class MovientoFuerzas : MonoBehaviour
                 jumpCount++;
                 rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, 0f); // Eliminar la velocidad vertical antes de saltar
                 rigidBody2D.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+                audioSource.PlayOneShot(jumpClip);
             }
         }
 
