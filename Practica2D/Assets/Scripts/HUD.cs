@@ -7,10 +7,29 @@ public class HUD : MonoBehaviour
 {
     public GameManager gameManager;
     public TextMeshProUGUI puntos;
+    public TextMeshProUGUI copas;
+    public GameObject[] vidas;
 
-        // Update is called once per frame
-    void Update()
+    //Controlador de frutas
+    public void ActualizarPuntos(int puntosTotales)
     {
-        puntos.text = "Puntuación Frutas:" + gameManager.PuntosTotales.ToString();
+        puntos.text = "Puntuación Frutas: " + puntosTotales.ToString();
+    }
+
+    //Controlador de copas
+    public void ActualizarCopas(int copasTotales)
+    {
+        copas.text = "Puntuación Copitas: " + copasTotales.ToString();
+    }
+
+
+    public void DesactivarVida(int indice)
+    {
+        vidas[indice].SetActive(false);
+    }
+
+    public void ActivarVida(int indice)
+    {
+        vidas[indice].SetActive(true);
     }
 }

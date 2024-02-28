@@ -124,19 +124,4 @@ public class MovientoFuerzas : MonoBehaviour
         rigidBody2D.AddForce(direccionGolpe * fuerzaGolpe);
     }
 
-    //Respawn
-    private void Respawn()
-    {
-        this.transform.position = new Vector2 (0, 0);
-        Debug.Log("Has muerto, intentálo de nuevo.");
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "enemigo")
-        {
-            Respawn();
-        }
-    }
-
 }

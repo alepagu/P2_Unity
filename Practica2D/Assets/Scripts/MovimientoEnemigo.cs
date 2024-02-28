@@ -43,12 +43,12 @@ public class MovimientoEnemigo : MonoBehaviour
         }
     }
 
-    //Danno o rebote
-    private void OnCollisionEnter2D(Collision2D other)
+    //Daño o rebote
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<MovientoFuerzas>().AplicarGolpe();
+            GameManager.Instance.PerderVida();
         }
     }
 
