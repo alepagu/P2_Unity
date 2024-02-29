@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class HUD : MonoBehaviour
 {
-    public GameManager gameManager;
     public TextMeshProUGUI puntos;
     public TextMeshProUGUI copas;
     public GameObject[] vidas;

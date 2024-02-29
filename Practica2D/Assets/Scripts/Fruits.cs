@@ -8,25 +8,18 @@ public class Fruits : MonoBehaviour
     public int valor = 1;
     public GameManager gameManager;
 
-    //Sonido
-    public AudioSource audioSource;
+    //Sonid
     public AudioClip comer;
 
-    private void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        audioSource = GetComponent<AudioSource>();
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             Debug.Log("El personaje me ha comido");
             gameManager.SumarPuntos(valor);
-            audioSource.Play();
             Destroy(this.gameObject);
+            AudioManager.Instance.ReproducirSonido(comer);
         }
-        
         
     }
 }

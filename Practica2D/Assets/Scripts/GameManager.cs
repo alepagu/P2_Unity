@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,18 @@ public class GameManager : MonoBehaviour
     public HUD hud;
     private int vidas = 3;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.Log("Fallo con corazones");
+        }
+    }
+
     //Para instancias
     public static GameManager Instance { get; private set; }
 
@@ -24,7 +37,7 @@ public class GameManager : MonoBehaviour
     {
         puntosTotales += puntosASumar;
         hud.ActualizarPuntos(PuntosTotales);
-        Debug.Log(puntosTotales);
+        Debug.Log("Frutas: " + puntosTotales);
     }
 
     //Suma de Copas
@@ -32,18 +45,31 @@ public class GameManager : MonoBehaviour
     {
         copasTotales += copasASumar;
         hud.ActualizarCopas(CopasTotales);
-        Debug.Log(copasTotales);
+        Debug.Log("Copitas: " + copasTotales);
     }
 
+    //Funciones Vidas
     public void PerderVida()
     {
         vidas -= 1;
+        if (vidas == 0) 
+        {
+            //Reinicio de partida
+            SceneManager.LoadScene(0);
+        }
+
         hud.DesactivarVida(vidas);
     }
 
-    public void ActivarVida()
+    public bool ActivarVida()
     {
+        if (vidas == 3)
+        {
+            return false;
+        }
+
         hud.ActivarVida(vidas);
         vidas += 1;
+        return true;
     }
 }

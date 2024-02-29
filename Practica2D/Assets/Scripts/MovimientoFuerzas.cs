@@ -25,10 +25,6 @@ public class MovientoFuerzas : MonoBehaviour
     private int jumpCount;
     public int maxJumpCount = 1;
 
-    //Rebote por Colisión
-    public bool puedeMoverse = true;
-    public float fuerzaGolpe;
-
     //Sonido
     private AudioSource audioSource;
     public AudioClip jumpClip;
@@ -106,22 +102,6 @@ public class MovientoFuerzas : MonoBehaviour
         }
 
     }
-    //Rebote
-    public void AplicarGolpe()
-    {
-        puedeMoverse = false;
-        Vector2 direccionGolpe;
-
-        if (rigidBody2D.velocity.x > 0)
-        {
-            direccionGolpe = new Vector2(-1, 1);
-        }
-        else
-        {
-            direccionGolpe = new Vector2(1, 1);
-        }
-
-        rigidBody2D.AddForce(direccionGolpe * fuerzaGolpe);
-    }
+    
 
 }

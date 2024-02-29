@@ -43,13 +43,4 @@ public class MovimientoEnemigo : MonoBehaviour
         }
     }
 
-    //Daño o rebote
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            GameManager.Instance.PerderVida();
-        }
-    }
-
 }

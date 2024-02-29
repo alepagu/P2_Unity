@@ -8,7 +8,6 @@ public class Copitas : MonoBehaviour
     public GameManager gameManager;
 
     //Sonido
-    //private AudioSource audioSource;
     public AudioClip copitas;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -16,5 +15,6 @@ public class Copitas : MonoBehaviour
         Debug.Log("El personaje me ha cogido");
         gameManager.SumarCopas(valor);
         Destroy(this.gameObject);
+        AudioManager.Instance.ReproducirSonido(copitas);
     }
 }
